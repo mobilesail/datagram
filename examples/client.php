@@ -9,7 +9,7 @@ $resolver = $factory->createCached('8.8.8.8', $loop);
 
 $factory = new React\Datagram\Factory($loop, $resolver);
 
-$factory->createClient('unix:///tmp/test.sock')->then(function (React\Datagram\Socket $client) use ($loop) {
+$factory->createClient('unix://tmp/test.sock')->then(function (React\Datagram\Socket $client) use ($loop) {
     $client->send('first');
 
     $client->on('message', function($message, $serverAddress, $client) {
