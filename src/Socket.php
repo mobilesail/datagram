@@ -58,6 +58,7 @@ class Socket extends EventEmitter implements SocketInterface
     {
         if ($this->socket !== false) {
             $this->loop->addReadStream($this->socket, array($this, 'onReceive'));
+            $this->loop->addEnterIdle($this->socket, array($this, 'onEnterIdle'));
         }
     }
 
@@ -73,6 +74,11 @@ class Socket extends EventEmitter implements SocketInterface
         }
 
         $this->emit('message', array($data, $peer, $this));
+    }
+    
+    public function onEnterIdle()
+    {
+        $this->emit('EnterIdle', array($this));
     }
 
     public function close()
