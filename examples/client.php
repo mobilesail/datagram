@@ -7,7 +7,7 @@ $loop = React\EventLoop\Factory::create();
 $factory = new React\Dns\Resolver\Factory();
 $resolver = $factory->createCached('8.8.8.8', $loop);
 
-$factory = new React\Datagram\Factory($loop, $resolver);
+$factory = new React\Datagram\Factory($loop);//, $resolver);
 
 $factory->createClient('unix://tmp/test.sock')->then(function (React\Datagram\Socket $client) use ($loop) {
     $client->send('first');
