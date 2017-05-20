@@ -16,7 +16,7 @@
     "require": {
         "php": ">=5.3",
         "evenement/evenement": "~1.0|~2.0",
-        "react/event-loop": ">=0.2, <=0.5",
+        "react/event-loop": "master",
         "react/dns": ">=0.2, <0.5",
         "react/promise": "~2.1|~1.2"
     },
