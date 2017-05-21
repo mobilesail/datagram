@@ -37,7 +37,7 @@ class FactoryUnix
     {
         $loop = $this->loop;
 
-        $socket = @stream_socket_server($address, $errno, $errstr, STREAM_SERVER_BIND);
+        $socket = @stream_socket_server($address, $errno, $errstr);
         if (!$socket) {
             throw new Exception('Unable to create server socket: ' . $errstr, $errno);
         }
