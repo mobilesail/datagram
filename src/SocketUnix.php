@@ -119,7 +119,7 @@ class SocketUnix extends EventEmitter implements SocketInterface
 
     protected function handleReceive(&$peerAddress)
     {
-        $data = stream_socket_recvfrom($this->socket, $this->bufferSize, 0, $peerAddress);
+        $data = stream_socket_recvfrom($this->socket, $this->bufferSize);
 
         if ($data === false) {
             // receiving data failed => remote side rejected one of our packets
