@@ -9,7 +9,7 @@ use React\Datagram\Socket;
 use \Exception;
 use React\Promise\CancellablePromiseInterface;
 
-class Factory
+class FactoryUnix
 {
     protected $loop;
     protected $resolver;
