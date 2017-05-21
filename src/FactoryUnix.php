@@ -30,7 +30,7 @@ class FactoryUnix
             throw new Exception('Unable to create client socket: ' . $errstr, $errno);
         }
 
-        return new SocketUnix($loop, $socket);
+        return new SocketUnixClient($loop, $socket);
     }
 
     public function createServer($address)
@@ -42,6 +42,6 @@ class FactoryUnix
             throw new Exception('Unable to create server socket: ' . $errstr, $errno);
         }
 
-        return new SocketUnix($loop, $socket);
+        return new SocketUnixServer($loop, $socket);
     }
 }
