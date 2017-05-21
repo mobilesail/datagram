@@ -128,7 +128,7 @@ class SocketUnixServer extends EventEmitter implements SocketInterface
         }
         
         $this->emit('connection', array(
-            new SocketUnixClient($loop, $newSocket)
+            new SocketUnixClient($this->loop, $newSocket)
         ));
                 
         /*
