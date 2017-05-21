@@ -9,7 +9,8 @@ $resolver = $factory->createCached('8.8.8.8', $loop);
 
 $factory = new React\Datagram\FactoryUnix($loop);//, $resolver);
 
-$factory->createClient('unix:///tmp/MSTest.sock')->then(function (React\Datagram\Socket $client) use ($loop) {
+//$factory->createClient('unix:///tmp/MSTest.sock')->then(function (React\Datagram\Socket $client) use ($loop) {
+$client = $factory->createClient('unix:///tmp/MSTest.sock');
     $client->send('first');
 
     $client->on('message', function($message, $serverAddress, $client) {
@@ -37,8 +38,5 @@ $factory->createClient('unix:///tmp/MSTest.sock')->then(function (React\Datagram
             $client->send(trim($msg));
         }
     });
-}, function($error) {
-    echo 'ERROR: ' . $error->getMessage() . PHP_EOL;
-});
 
 $loop->run();
