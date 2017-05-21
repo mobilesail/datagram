@@ -5,7 +5,7 @@ namespace React\Datagram;
 use React\EventLoop\LoopInterface;
 use React\Dns\Resolver\Resolver;
 use React\Promise;
-use React\Datagram\Socket;
+use React\Datagram\SocketUnix;
 use \Exception;
 use React\Promise\CancellablePromiseInterface;
 
@@ -30,7 +30,7 @@ class FactoryUnix
             throw new Exception('Unable to create client socket: ' . $errstr, $errno);
         }
 
-        return new Socket($loop, $socket);
+        return new SocketUnix($loop, $socket);
     }
 
     public function createServer($address)
@@ -42,6 +42,6 @@ class FactoryUnix
             throw new Exception('Unable to create server socket: ' . $errstr, $errno);
         }
 
-        return new Socket($loop, $socket);
+        return new SocketUnix($loop, $socket);
     }
 }
