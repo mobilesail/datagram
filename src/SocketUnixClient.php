@@ -120,8 +120,9 @@ class SocketUnixClient extends EventEmitter implements SocketInterface
     protected function handleReceive(&$peerAddress)
     {
         $data = stream_socket_recvfrom($this->socket, $this->bufferSize);
-
-        if ($data === false) {
+        
+        
+        if ($data === false || (string)$data === '') {
             //    empty data => connection was closed
             $this->close();
             return;
