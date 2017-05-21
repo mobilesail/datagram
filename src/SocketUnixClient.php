@@ -73,7 +73,7 @@ class SocketUnixClient extends EventEmitter implements SocketInterface
             return;
         }
 
-        $this->emit('message', array($data, $peer, $this));
+        $this->emit('data', array($data, $peer, $this));
     }
     
     public function onEnterIdle()
