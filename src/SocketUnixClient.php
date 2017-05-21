@@ -124,6 +124,7 @@ class SocketUnixClient extends EventEmitter implements SocketInterface
         if ($data === false) {
             //    empty data => connection was closed
             $this->close();
+            return;
         }
 
         $peerAddress = $this->sanitizeAddress($peerAddress);
