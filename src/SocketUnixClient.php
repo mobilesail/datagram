@@ -122,11 +122,8 @@ class SocketUnixClient extends EventEmitter implements SocketInterface
         $data = stream_socket_recvfrom($this->socket, $this->bufferSize);
 
         if ($data === false) {
-            // receiving data failed => remote side rejected one of our packets
-            // due to the nature of UDP, there's no way to tell which one exactly
-            // $peer is not filled either
-
-            throw new Exception('Invalid message');
+            //    empty data => connection was closed
+            $this->close();
         }
 
         $peerAddress = $this->sanitizeAddress($peerAddress);
