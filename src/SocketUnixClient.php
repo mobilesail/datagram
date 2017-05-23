@@ -63,7 +63,7 @@ class SocketUnixClient extends EventEmitter implements SocketInterface
             $this->loop->addReadStream($this->socket, array($this, 'onNewConnection'));
             $this->loop->addEnterIdle($this->socket, array($this, 'onEnterIdle'));
             $this->loop->addSignalInterrupted($this->socket, array($this, 'onSignalInterrupted'));
-            $this->loop->addOnWake($this->socket, array($this, 'onEnterIdle'));
+            $this->loop->addOnWake($this->socket, array($this, 'onWake'));
         }
     }
 
