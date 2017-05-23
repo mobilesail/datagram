@@ -52,6 +52,8 @@ class SocketUnixServer extends EventEmitter implements SocketInterface
     public function pause()
     {
         $this->loop->removeReadStream($this->socket);
+        $this->loop->removeEnterIdle($this->socket);
+        $this->loop->removeOnWake($this->socket);
     }
 
     public function resume()
@@ -59,6 +61,7 @@ class SocketUnixServer extends EventEmitter implements SocketInterface
         if ($this->socket !== false) {
             $this->loop->addReadStream($this->socket, array($this, 'onNewConnection'));
             $this->loop->addEnterIdle($this->socket, array($this, 'onEnterIdle'));
+            $this->loop->addOnWake($this->socket, array($this, 'onEnterIdle'));
         }
     }
 
@@ -79,6 +82,11 @@ class SocketUnixServer extends EventEmitter implements SocketInterface
     public function onEnterIdle()
     {
         $this->emit('EnterIdle', array($this));
+    }
+    
+    public function onWake()
+    {
+        $this->emit('onWake', array($this));
     }
 
     public function close()
