@@ -60,7 +60,7 @@ class SocketUnixClient extends EventEmitter implements SocketInterface
     public function resume()
     {
         if ($this->socket !== false) {
-            $this->loop->addReadStream($this->socket, array($this, 'onNewConnection'));
+            $this->loop->addReadStream($this->socket, array($this, 'onReceive'));
             $this->loop->addEnterIdle($this->socket, array($this, 'onEnterIdle'));
             $this->loop->addSignalInterrupted($this->socket, array($this, 'onSignalInterrupted'));
             $this->loop->addOnWake($this->socket, array($this, 'onWake'));
