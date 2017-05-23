@@ -150,6 +150,7 @@ class SocketUnixClient extends EventEmitter implements SocketInterface
 
     protected function handleClose()
     {
+        stream_socket_shutdown($this->socket, STREAM_SHUT_RDWR);
         fclose($this->socket);
     }
 }
