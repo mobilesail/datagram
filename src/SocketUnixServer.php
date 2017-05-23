@@ -53,6 +53,7 @@ class SocketUnixServer extends EventEmitter implements SocketInterface
     {
         $this->loop->removeReadStream($this->socket);
         $this->loop->removeEnterIdle($this->socket);
+        $this->loop->removeSignalInterrupted($this->socket);
         $this->loop->removeOnWake($this->socket);
     }
 
@@ -61,6 +62,7 @@ class SocketUnixServer extends EventEmitter implements SocketInterface
         if ($this->socket !== false) {
             $this->loop->addReadStream($this->socket, array($this, 'onNewConnection'));
             $this->loop->addEnterIdle($this->socket, array($this, 'onEnterIdle'));
+            $this->loop->addSignalInterrupted($this->socket, array($this, 'onSignalInterrupted'));
             $this->loop->addOnWake($this->socket, array($this, 'onEnterIdle'));
         }
     }
@@ -82,6 +84,11 @@ class SocketUnixServer extends EventEmitter implements SocketInterface
     public function onEnterIdle()
     {
         $this->emit('EnterIdle', array($this));
+    }
+    
+    public function onSignalInterrupted()
+    {
+        $this->emit('SignalInterrupted', array($this));
     }
     
     public function onWake()
