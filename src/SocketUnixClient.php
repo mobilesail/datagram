@@ -33,7 +33,11 @@ class SocketUnixClient extends EventEmitter implements SocketInterface
 
         $this->resume();
     }
-
+    
+    public function getSocketStream(){
+        return $this->socket;
+    }
+    
     public function getLocalAddress()
     {
         return $this->sanitizeAddress(@stream_socket_get_name($this->socket, false));
