@@ -33,6 +33,8 @@ class Buffer extends EventEmitter
             $this->handleResume();
             $this->listening = true;
         }
+        
+        $this->onWritable();
     }
 
     public function onWritable()
